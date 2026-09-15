@@ -18,6 +18,8 @@
     --text: #ffffff;
     --muted: #8b8b8f;
     --dim: #5f5f63;
+    --error: #ff6b6b;
+    --success: #7ee3a8;
     --line: rgba(255, 255, 255, 0.10);
     --line-soft: rgba(255, 255, 255, 0.06);
     --display: "Plus Jakarta Sans", "Segoe UI", sans-serif;
@@ -108,19 +110,6 @@ img {
     inset: 0;
     opacity: 0.045;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.cursor-glow {
-    position: fixed;
-    width: 26rem;
-    height: 26rem;
-    margin: -13rem 0 0 -13rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.07), transparent 60%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 5;
 }
 
 .scroll-progress {
@@ -278,7 +267,6 @@ section {
     scroll-margin-top: 8rem;
 }
 
-.eyebrow,
 .section-label {
     font-family: var(--mono);
     font-size: 1.2rem;
@@ -404,42 +392,6 @@ section {
 @keyframes bob {
     0%, 100% { transform: translateY(-3px); opacity: 0.5; }
     50%      { transform: translateY(3px); opacity: 1; }
-}
-
-.marquee {
-    width: 100vw;
-    margin-top: 4rem;
-    padding: 1.6rem 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
-}
-
-.marquee-track {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    width: max-content;
-    animation: slide 26s linear infinite;
-}
-
-.marquee-track span {
-    font-family: var(--display);
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.55);
-    white-space: nowrap;
-}
-
-.marquee-track em {
-    font-style: normal;
-    color: var(--dim);
-    font-size: 1.2rem;
-}
-
-@keyframes slide {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
 }
 
 /* ---------- about ---------- */
@@ -905,6 +857,58 @@ section {
     outline: none;
     border-color: rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.04);
+}
+
+.contact-form label span i {
+    font-style: normal;
+    color: var(--dim);
+    letter-spacing: 0;
+}
+
+.contact-form input[aria-invalid="true"],
+.contact-form textarea[aria-invalid="true"] {
+    border-color: rgba(255, 107, 107, 0.55);
+    background: rgba(255, 107, 107, 0.04);
+}
+
+.field-error {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--error);
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.field-error.show {
+    max-height: 6rem;
+    margin-top: 0.7rem;
+    opacity: 1;
+}
+
+.contact-form .btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+.form-status {
+    margin-top: 1.6rem;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--muted);
+    min-height: 2rem;
+}
+
+.form-status.is-error {
+    color: var(--error);
+}
+
+.form-status.is-success {
+    color: var(--success);
 }
 
 /* ---------- toast ---------- */

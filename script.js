@@ -3,10 +3,26 @@
    Noir edition interactions
    ========================================================= */
 
+/* ---------------------------------------------------------
+   Contact delivery settings
+   ---------------------------------------------------------
+   CONTACT_EMAIL   where messages should land.
+   FORM_ENDPOINT   the service that forwards the form to that
+                   inbox. FormSubmit needs no account: the first
+                   message sent from the live site triggers a
+                   one-time activation email to CONTACT_EMAIL.
+                   Click the link in it and every later message
+                   arrives in the inbox automatically.
+                   Set FORM_ENDPOINT to "" to skip the service
+                   and simply open the visitor's mail app with
+                   everything pre-filled.
+--------------------------------------------------------- */
+const CONTACT_EMAIL = "kongdymond56@gmail.com";
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
 const menuIcon = document.querySelector("#menu-icon");
 const mobileMenu = document.querySelector(".mobile-menu");
 const header = document.querySelector(".header");
-const cursorGlow = document.querySelector(".cursor-glow");
 const canvas = document.querySelector("#particle-canvas");
 const ctx = canvas ? canvas.getContext("2d") : null;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -15,6 +31,7 @@ const sections = document.querySelectorAll("section[id]");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const projectCards = document.querySelectorAll(".project-card");
 const contactForm = document.querySelector(".contact-form");
+const formStatus = document.querySelector(".form-status");
 const toast = document.querySelector(".toast");
 const showEmailButton = document.querySelector(".show-email");
 const accordionItems = document.querySelectorAll(".accordion-item");
@@ -52,9 +69,8 @@ accordionItems.forEach((item) => {
     if (!head) return;
 
     head.addEventListener("click", () => {
-        const wasOpen = item.classList.contains("open");
-        accordionItems.forEach((other) => other.classList.remove("open"));
-        if (!wasOpen) item.classList.add("open");
+        // each panel toggles on its own — opening one never closes another
+        item.classList.toggle("open");
     });
 });
 
@@ -156,23 +172,15 @@ window.addEventListener("pointermove", (event) => {
     mouse.targetX = event.clientX;
     mouse.targetY = event.clientY;
     mouse.active = true;
-
-    if (cursorGlow) {
-        cursorGlow.style.opacity = "1";
-        cursorGlow.style.left = `${event.clientX}px`;
-        cursorGlow.style.top = `${event.clientY}px`;
-    }
 });
 
 window.addEventListener("pointerleave", () => {
     mouse.active = false;
-    if (cursorGlow) cursorGlow.style.opacity = "0";
 });
 
 /* ---------- reveal on scroll ---------- */
 
 const revealTargets = [
-    ".eyebrow",
     ".portrait-frame",
     ".hero-copy",
     ".scroll-cue",
@@ -274,11 +282,178 @@ function showToast(message) {
     toastTimer = window.setTimeout(() => toast.classList.remove("show"), 3200);
 }
 
+/* ---------- contact form validation + delivery ---------- */
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+
+const validators = {
+    name(value) {
+        if (!value) return "Please enter your name so I know who I am replying to.";
+        if (value.length < 2) return "That name looks a little short.";
+        return "";
+    },
+    email(value) {
+        if (!value) return "Please enter an email address I can reply to.";
+        if (!EMAIL_PATTERN.test(value)) return "That email address does not look complete.";
+        return "";
+    },
+    phone(value) {
+        if (value && !/^[\d\s+()-]{6,}$/.test(value)) return "Please use digits, spaces, or + only.";
+        return "";
+    },
+    subject(value) {
+        if (!value) return "Please add a subject so I can prioritise your message.";
+        return "";
+    },
+    message(value) {
+        if (!value) return "Please write a short message.";
+        if (value.length < 10) return "A little more detail would help. Ten characters or more, please.";
+        return "";
+    }
+};
+
+function setFieldError(field, message) {
+    const wrapper = field.closest("label");
+    const slot = wrapper ? wrapper.querySelector(".field-error") : null;
+
+    if (message) {
+        field.setAttribute("aria-invalid", "true");
+        if (slot) {
+            slot.textContent = message;
+            slot.classList.add("show");
+        }
+    } else {
+        field.removeAttribute("aria-invalid");
+        if (slot) {
+            slot.classList.remove("show");
+            slot.textContent = "";
+        }
+    }
+}
+
+function setFormStatus(message, state) {
+    if (!formStatus) return;
+    formStatus.textContent = message;
+    formStatus.classList.remove("is-error", "is-success");
+    if (state) formStatus.classList.add(state);
+}
+
+function validateForm(form) {
+    let firstInvalid = null;
+
+    Object.keys(validators).forEach((name) => {
+        const field = form.elements[name];
+        if (!field) return;
+
+        const error = validators[name](field.value.trim());
+        setFieldError(field, error);
+        if (error && !firstInvalid) firstInvalid = field;
+    });
+
+    return firstInvalid;
+}
+
+function openMailClient(values) {
+    const body = [
+        `Name: ${values.name}`,
+        `Email: ${values.email}`,
+        values.phone ? `Phone: ${values.phone}` : null,
+        "",
+        values.message
+    ].filter((line) => line !== null).join("\n");
+
+    const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(values.subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = href;
+}
+
+async function postToEndpoint(values) {
+    const payload = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone || "Not provided",
+        subject: values.subject,
+        message: values.message,
+        _subject: `Portfolio enquiry: ${values.subject}`,
+        _template: "table",
+        _captcha: "false"
+    };
+
+    const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+    return response;
+}
+
 if (contactForm) {
-    contactForm.addEventListener("submit", (event) => {
+    contactForm.querySelectorAll("input, textarea").forEach((field) => {
+        field.addEventListener("input", () => {
+            if (field.hasAttribute("aria-invalid")) setFieldError(field, "");
+        });
+
+        field.addEventListener("blur", () => {
+            const rule = validators[field.name];
+            if (rule) setFieldError(field, rule(field.value.trim()));
+        });
+    });
+
+    contactForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        showToast("Message ready. I will get back to you soon.");
-        contactForm.reset();
+
+        const firstInvalid = validateForm(contactForm);
+
+        if (firstInvalid) {
+            setFormStatus("Please complete the highlighted fields before sending.", "is-error");
+            firstInvalid.focus();
+            showToast("Some details are still missing.");
+            return;
+        }
+
+        const values = {
+            name: contactForm.elements.name.value.trim(),
+            email: contactForm.elements.email.value.trim(),
+            phone: contactForm.elements.phone.value.trim(),
+            subject: contactForm.elements.subject.value.trim(),
+            message: contactForm.elements.message.value.trim()
+        };
+
+        if (!FORM_ENDPOINT) {
+            setFormStatus(`Opening your email app so you can send this to ${CONTACT_EMAIL}.`, "is-success");
+            showToast("Your message is ready to send.");
+            openMailClient(values);
+            return;
+        }
+
+        const submitButton = contactForm.querySelector("button[type='submit']");
+        const label = submitButton ? submitButton.querySelector(".btn-label") : null;
+        const originalLabel = label ? label.textContent : "";
+
+        if (submitButton) submitButton.disabled = true;
+        if (label) label.textContent = "Sending";
+        setFormStatus("Sending your message…");
+
+        try {
+            await postToEndpoint(values);
+            setFormStatus("Thank you. Your message is on its way and I will reply shortly.", "is-success");
+            showToast("Message sent. I will get back to you soon.");
+            contactForm.reset();
+        } catch (error) {
+            setFormStatus(
+                `Direct sending is unavailable right now, so I have opened your email app with the message ready for ${CONTACT_EMAIL}.`,
+                "is-error"
+            );
+            showToast("Sending failed. Opening your email app instead.");
+            openMailClient(values);
+        } finally {
+            if (submitButton) submitButton.disabled = false;
+            if (label) label.textContent = originalLabel;
+        }
     });
 }
 

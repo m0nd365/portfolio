@@ -25,7 +25,6 @@
         <div class="glow glow-two"></div>
         <div class="noise-layer"></div>
     </div>
-    <div class="cursor-glow" aria-hidden="true"></div>
 
     <header class="header">
         <a href="#home" class="logo">DYMOND<span>KONG</span></a>
@@ -58,8 +57,6 @@
 
     <main>
         <section class="home" id="home">
-            <p class="eyebrow">[ Portfolio — 2026 ]</p>
-
             <div class="portrait-frame">
                 <img src="image1.jpg" alt="Portrait of Dymond Kong">
             </div>
@@ -74,21 +71,6 @@
                 <i class="bx bx-chevrons-down"></i>
                 Scroll to explore
             </a>
-
-            <div class="marquee" aria-hidden="true">
-                <div class="marquee-track">
-                    <span>Frontend</span><em>✳</em>
-                    <span>Backend</span><em>✳</em>
-                    <span>UI Design</span><em>✳</em>
-                    <span>Web &amp; Mobile</span><em>✳</em>
-                    <span>Motion</span><em>✳</em>
-                    <span>Frontend</span><em>✳</em>
-                    <span>Backend</span><em>✳</em>
-                    <span>UI Design</span><em>✳</em>
-                    <span>Web &amp; Mobile</span><em>✳</em>
-                    <span>Motion</span><em>✳</em>
-                </div>
-            </div>
         </section>
 
         <section class="about" id="about">
@@ -383,38 +365,48 @@
                     </div>
                 </div>
 
-                <form action="#" class="contact-form">
+                <form action="#" class="contact-form" novalidate>
                     <h3>Tell me a bit about yourself</h3>
+
+                    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
 
                     <label>
                         <span>Full Name</span>
-                        <input type="text" placeholder="Your name">
+                        <input type="text" name="name" placeholder="Your name" autocomplete="name">
+                        <small class="field-error"></small>
                     </label>
 
                     <div class="field-row">
                         <label>
                             <span>Email Address</span>
-                            <input type="email" placeholder="you@email.com">
+                            <input type="email" name="email" placeholder="you@email.com" autocomplete="email">
+                            <small class="field-error"></small>
                         </label>
                         <label>
-                            <span>Phone</span>
-                            <input type="tel" placeholder="+855">
+                            <span>Phone <i>(optional)</i></span>
+                            <input type="tel" name="phone" placeholder="+855" autocomplete="tel">
+                            <small class="field-error"></small>
                         </label>
                     </div>
 
                     <label>
                         <span>Subject</span>
-                        <input type="text" placeholder="What is this about?">
+                        <input type="text" name="subject" placeholder="What is this about?">
+                        <small class="field-error"></small>
                     </label>
 
                     <label>
                         <span>Message</span>
-                        <textarea rows="6" placeholder="Type a message"></textarea>
+                        <textarea rows="6" name="message" placeholder="Type a message"></textarea>
+                        <small class="field-error"></small>
                     </label>
 
                     <button type="submit" class="btn">
-                        Send Message <i class="bx bx-up-arrow-alt"></i>
+                        <span class="btn-label">Send Message</span>
+                        <i class="bx bx-up-arrow-alt"></i>
                     </button>
+
+                    <p class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </section>
