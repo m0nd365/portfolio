@@ -4,165 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dymond Kong | Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=white-redesign">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=noir">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="scroll-progress" aria-hidden="true"></div>
-    <div class="aurora-bg" aria-hidden="true">
+
+    <div class="stage-bg" aria-hidden="true">
         <canvas id="particle-canvas"></canvas>
-        <div class="name-runner runner-one">
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-        </div>
-        <div class="name-runner runner-two">
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-        </div>
-        <div class="name-runner runner-three">
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-            <span>Dymond Kong</span>
-        </div>
-        <div class="aurora-sweep sweep-one"></div>
-        <div class="aurora-sweep sweep-two"></div>
-        <div class="aurora-sweep sweep-three"></div>
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
         <div class="noise-layer"></div>
     </div>
     <div class="cursor-glow" aria-hidden="true"></div>
 
     <header class="header">
-        <a href="#home" class="logo">Dymond <span>Kong</span></a>
+        <span class="header-mark" aria-hidden="true">+</span>
 
-        <i class="bx bx-menu" id="menu-icon"></i>
-
-        <nav class="navbar">
+        <nav class="navbar nav-left">
             <a href="#home">Home</a>
+            <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#about">About</a>
+            <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#services">Services</a>
-            <a href="#projects">Projects</a>
+        </nav>
+
+        <a href="#home" class="logo">DYMOND<span>KONG</span></a>
+
+        <nav class="navbar nav-right">
+            <a href="#projects">Work</a>
+            <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#contact">Contact</a>
         </nav>
 
-        <button class="gradient-btn" type="button">Start a Project</button>
+        <i class="bx bx-plus" id="menu-icon" aria-label="Menu"></i>
+
+        <div class="mobile-menu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
     </header>
 
     <main>
         <section class="home" id="home">
-            <div class="home-content">
-                <p class="section-label">Portfolio 2026</p>
-                <h1>Dymond Kong</h1>
-                <p class="hero-copy">
-                    Junior student building clean websites with sharp motion,
-                    thoughtful layout, smooth interactions, and a modern white aesthetic.
-                </p>
+            <p class="eyebrow">[ Portfolio — 2026 ]</p>
 
-                <div class="btn-group">
-                    <a href="#projects" class="btn">View Work</a>
-                    <a href="#contact" class="btn">Contact</a>
-                </div>
-
-                <div class="impact-strip">
-                    <span>Frontend</span>
-                    <span>Backend</span>
-                    <span>Web/Mobile Developer</span>
-                    <span>UI Design</span>
-                </div>
+            <div class="portrait-frame">
+                <img src="image1.jpg" alt="Portrait of Dymond Kong">
             </div>
 
-            <div class="hero-visual">
-                <div class="portrait-frame home-img">
-                    <img src="image1.jpg" alt="Portrait of Dymond Kong">
-                </div>
-                <div class="hero-stats" aria-label="Portfolio highlights">
-                    <div>
-                        <strong>06</strong>
-                        <small>Selected projects</small>
-                    </div>
-                    <div>
-                        <strong>03</strong>
-                        <small>Core services</small>
-                    </div>
-                    <div>
-                        <strong>100%</strong>
-                        <small>Learning mindset</small>
-                    </div>
+            <p class="hero-copy">
+                I'm Dymond Kong, a Phnom Penh based junior developer and
+                designer building clean, fast websites. I turn rough ideas
+                into interfaces that feel considered, quiet, and confident.
+            </p>
+
+            <a href="#projects" class="scroll-cue">
+                <i class="bx bx-chevrons-down"></i>
+                Scroll to explore
+            </a>
+
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track">
+                    <span>Frontend</span><em>✳</em>
+                    <span>Backend</span><em>✳</em>
+                    <span>UI Design</span><em>✳</em>
+                    <span>Web &amp; Mobile</span><em>✳</em>
+                    <span>Motion</span><em>✳</em>
+                    <span>Frontend</span><em>✳</em>
+                    <span>Backend</span><em>✳</em>
+                    <span>UI Design</span><em>✳</em>
+                    <span>Web &amp; Mobile</span><em>✳</em>
+                    <span>Motion</span><em>✳</em>
                 </div>
             </div>
         </section>
 
         <section class="about" id="about">
-            <div class="about-img">
-                <img src="image1.jpg" alt="Dymond Kong profile">
+            <div class="section-heading">
+                <h2 class="heading">Why Work <span class="outline">With Me</span></h2>
+                <p class="section-sub">
+                    Still a student, already shipping. Here is how I approach
+                    every build, from the first wireframe to the last detail.
+                </p>
             </div>
 
-            <div class="about-content">
-                <p class="section-label">About</p>
-                <h2>Building taste, skill, and confidence one project at a time.</h2>
-                <p>
-                    I like portfolio experiences that feel clear before they feel loud.
-                    My focus is learning how to combine visual hierarchy, clean code,
-                    responsive structure, and motion that makes the page feel alive.
-                </p>
+            <div class="about-grid">
+                <div class="accordion">
+                    <div class="accordion-item open">
+                        <button class="accordion-head" type="button">
+                            <h4>Structure First</h4>
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>
+                                I start with hierarchy, spacing, and rhythm before a single
+                                color lands. A page that reads well without styling will
+                                always read better with it.
+                            </p>
+                        </div>
+                    </div>
 
-                <div class="about-list">
-                    <div>
-                        <i class="bx bx-layout"></i>
-                        <span>Clean layouts</span>
+                    <div class="accordion-item">
+                        <button class="accordion-head" type="button">
+                            <h4>Clean Code</h4>
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>
+                                Semantic HTML, predictable CSS, and JavaScript that stays
+                                readable a month later. I would rather write less and
+                                understand all of it.
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <i class="bx bx-devices"></i>
-                        <span>Responsive builds</span>
+
+                    <div class="accordion-item">
+                        <button class="accordion-head" type="button">
+                            <h4>Motion With Purpose</h4>
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>
+                                Animation should guide attention, not compete for it. Every
+                                transition here has a job: reveal, respond, or reassure.
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <i class="bx bx-mouse-alt"></i>
-                        <span>Smooth interactions</span>
+
+                    <div class="accordion-item">
+                        <button class="accordion-head" type="button">
+                            <h4>Always Learning</h4>
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>
+                                Each project is a deliberate step up from the last. New
+                                stack, new constraint, new detail to get right.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <a href="#contact" class="btn">Work With Me</a>
+                <div class="about-img">
+                    <img src="image1.jpg" alt="Dymond Kong at work">
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div>
+                    <strong>06</strong>
+                    <small>Selected projects</small>
+                </div>
+                <div>
+                    <strong>03</strong>
+                    <small>Core services</small>
+                </div>
+                <div>
+                    <strong>2026</strong>
+                    <small>Portfolio edition</small>
+                </div>
+                <div>
+                    <strong>100%</strong>
+                    <small>Learning mindset</small>
+                </div>
             </div>
         </section>
 
         <section class="services" id="services">
             <div class="section-heading">
-                <p class="section-label">Services</p>
-                <h2 class="heading">What I Can Build</h2>
+                <h2 class="heading">What I <span class="outline">Build</span></h2>
+                <p class="section-sub">
+                    Three things I keep sharpening, and the kind of work each one
+                    turns into.
+                </p>
             </div>
 
             <div class="services-container">
-                <div class="service-box">
-                    <div class="service-info">
-                        <i class="bx bxl-figma"></i>
-                        <h4>UI / UX Design</h4>
-                        <p>Modern page structure, clean spacing, visual systems, and interfaces that feel easy to understand.</p>
-                    </div>
-                </div>
+                <article class="service-box">
+                    <span class="service-index">(01)</span>
+                    <i class="bx bxl-figma service-badge"></i>
+                    <h4>UI / UX Design</h4>
+                    <p>
+                        Page structure, spacing systems, and interfaces that explain
+                        themselves. Wireframe to high fidelity, in one pass.
+                    </p>
+                    <span class="service-link">Design <i class="bx bx-up-arrow-alt"></i></span>
+                </article>
 
-                <div class="service-box">
-                    <div class="service-info">
-                        <i class="bx bx-code-alt"></i>
-                        <h4>Frontend Development</h4>
-                        <p>Responsive HTML, CSS, and JavaScript with animation that supports the design instead of fighting it.</p>
-                    </div>
-                </div>
+                <article class="service-box">
+                    <span class="service-index">(02)</span>
+                    <i class="bx bx-code-alt service-badge"></i>
+                    <h4>Frontend Development</h4>
+                    <p>
+                        Responsive HTML, CSS, and JavaScript. Accessible markup,
+                        smooth interaction, and layouts that hold at every width.
+                    </p>
+                    <span class="service-link">Build <i class="bx bx-up-arrow-alt"></i></span>
+                </article>
 
-                <div class="service-box">
-                    <div class="service-info">
-                        <i class="bx bx-data"></i>
-                        <h4>Backend Basics</h4>
-                        <p>Cleaner logic, structured data, and the technical foundation needed for real interactive products.</p>
-                    </div>
-                </div>
+                <article class="service-box">
+                    <span class="service-index">(03)</span>
+                    <i class="bx bx-data service-badge"></i>
+                    <h4>Backend Basics</h4>
+                    <p>
+                        Structured data, cleaner logic, and the foundation a real
+                        interactive product needs behind the interface.
+                    </p>
+                    <span class="service-link">Connect <i class="bx bx-up-arrow-alt"></i></span>
+                </article>
             </div>
         </section>
 
         <section class="projects" id="projects">
             <div class="section-heading">
-                <p class="section-label">Projects</p>
-                <h2 class="heading">Selected Work</h2>
+                <h2 class="heading">Latest <span class="outline">work</span></h2>
+                <p class="section-sub">
+                    Studies, concepts, and builds. Each one made to answer a
+                    specific design question.
+                </p>
             </div>
 
             <div class="project-filters" aria-label="Project filters">
@@ -174,135 +240,222 @@
 
             <div class="projects-box">
                 <article class="project-card" data-category="frontend creative">
-                    <img src="image7.jpg" alt="Prompt engineering project preview">
-                    <div class="project-meta">
-                        <span>Frontend</span>
-                        <span>Creative</span>
+                    <div class="project-shot">
+                        <img src="image7.jpg" alt="Prompt engineering project preview">
+                        <div class="project-tag">
+                            <h3>Prompt Engineering</h3>
+                            <span>Frontend</span>
+                        </div>
                     </div>
-                    <h3>Prompt Engineering Page</h3>
-                    <p>A polished concept focused on layout, motion, and a more memorable first impression.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>Layout, motion, and a sharper first impression.</p>
+                        <a href="#contact" aria-label="Review Prompt Engineering">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
 
                 <article class="project-card" data-category="design">
-                    <img src="image2.jpg" alt="Coffee landing page preview">
-                    <div class="project-meta">
-                        <span>Design</span>
+                    <div class="project-shot">
+                        <img src="image2.jpg" alt="Coffee landing page preview">
+                        <div class="project-tag">
+                            <h3>Coffee Landing</h3>
+                            <span>Design</span>
+                        </div>
                     </div>
-                    <h3>Coffee Landing Page</h3>
-                    <p>An interface study built around clean spacing, strong imagery, and smooth hover feedback.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>Clean spacing, strong imagery, quiet hover feedback.</p>
+                        <a href="#contact" aria-label="Review Coffee Landing">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
 
                 <article class="project-card" data-category="frontend">
-                    <img src="image3.jpg" alt="Web design project preview">
-                    <div class="project-meta">
-                        <span>Frontend</span>
+                    <div class="project-shot">
+                        <img src="image3.jpg" alt="Responsive web study preview">
+                        <div class="project-tag">
+                            <h3>Responsive Study</h3>
+                            <span>Frontend</span>
+                        </div>
                     </div>
-                    <h3>Responsive Web Study</h3>
-                    <p>A web design experiment using bold contrast, rhythm, and responsive visual structure.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>Contrast, rhythm, and structure that survives resizing.</p>
+                        <a href="#contact" aria-label="Review Responsive Study">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
 
                 <article class="project-card" data-category="design frontend">
-                    <img src="image4.jpg" alt="Interface concept preview">
-                    <div class="project-meta">
-                        <span>Design</span>
-                        <span>Frontend</span>
+                    <div class="project-shot">
+                        <img src="image4.jpg" alt="Interface concept preview">
+                        <div class="project-tag">
+                            <h3>Interface Concept</h3>
+                            <span>Design</span>
+                        </div>
                     </div>
-                    <h3>Interface Concept</h3>
-                    <p>A practice project shaped around better visual hierarchy and confident presentation.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>A practice build about hierarchy and confident presentation.</p>
+                        <a href="#contact" aria-label="Review Interface Concept">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
 
                 <article class="project-card" data-category="creative">
-                    <img src="image5.jpg" alt="Moonwatch creative project preview">
-                    <div class="project-meta">
-                        <span>Creative</span>
+                    <div class="project-shot">
+                        <img src="image5.jpg" alt="Moonwatch creative project preview">
+                        <div class="project-tag">
+                            <h3>Moonwatch Visual</h3>
+                            <span>Creative</span>
+                        </div>
                     </div>
-                    <h3>Moonwatch Visual</h3>
-                    <p>A creative build exploring color, depth, and interactive details across the page.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>Colour, depth, and interactive detail across one page.</p>
+                        <a href="#contact" aria-label="Review Moonwatch Visual">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
 
                 <article class="project-card" data-category="frontend creative">
-                    <img src="image6.jpg" alt="Portfolio layout preview">
-                    <div class="project-meta">
-                        <span>Frontend</span>
-                        <span>Creative</span>
+                    <div class="project-shot">
+                        <img src="image6.jpg" alt="Portfolio layout preview">
+                        <div class="project-tag">
+                            <h3>Portfolio Layout</h3>
+                            <span>Creative</span>
+                        </div>
                     </div>
-                    <h3>Portfolio Layout</h3>
-                    <p>A portfolio-ready layout focused on making the work feel energetic, readable, and premium.</p>
-                    <a href="#contact" class="btn">Review Project</a>
+                    <div class="project-foot">
+                        <p>Work presented so it reads premium and stays readable.</p>
+                        <a href="#contact" aria-label="Review Portfolio Layout">
+                            <i class="bx bx-up-arrow-alt"></i>
+                        </a>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section class="contact" id="contact">
-            <div class="contact-intro">
-                <p class="section-label">Contact</p>
-                <h2 class="heading">Let us build something clean.</h2>
-                <p>Send a message, or reveal the email and reach out directly.</p>
-                <button class="show-email" type="button" data-email="dymond@example.com">
-                    <i class="bx bx-envelope"></i>
-                    Show Email
-                </button>
+            <div class="section-heading">
+                <h2 class="heading">Get in <span class="outline">Touch</span></h2>
+                <p class="section-sub">
+                    Have a project, a question, or an opening for a junior
+                    developer? Send it over.
+                </p>
             </div>
 
-            <form action="#">
-                <div class="input-group">
-                    <div class="input-box">
-                        <input type="text" placeholder="Full Name">
-                        <input type="email" placeholder="Email">
+            <div class="contact-grid">
+                <div class="contact-intro">
+                    <div class="contact-line">
+                        <i class="bx bx-envelope"></i>
+                        <div>
+                            <h4>Reach me by email</h4>
+                            <p>I reply as soon as I can, usually within a day.</p>
+                            <button class="show-email" type="button" data-email="kongdymond56@gmail.com">
+                                Show Email
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="input-box">
-                        <input type="number" placeholder="Phone number">
-                        <input type="text" placeholder="Subject">
+                    <div class="contact-line">
+                        <i class="bx bx-code-block"></i>
+                        <div>
+                            <h4>See the code</h4>
+                            <p>Every project here is public and open to review.</p>
+                            <a href="https://github.com/m0nd365" class="contact-value">github.com/m0nd365</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-line">
+                        <i class="bx bx-map-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Phnom Penh, Cambodia. Working remotely, any timezone.</p>
+                            <span class="contact-value">GMT+7</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-group-2">
-                    <textarea name="" id="" placeholder="Your Message" cols="30" rows="11"></textarea>
-                    <input type="submit" value="Send Message" class="btn">
-                </div>
-            </form>
+                <form action="#" class="contact-form">
+                    <h3>Tell me a bit about yourself</h3>
+
+                    <label>
+                        <span>Full Name</span>
+                        <input type="text" placeholder="Your name">
+                    </label>
+
+                    <div class="field-row">
+                        <label>
+                            <span>Email Address</span>
+                            <input type="email" placeholder="you@email.com">
+                        </label>
+                        <label>
+                            <span>Phone</span>
+                            <input type="tel" placeholder="+855">
+                        </label>
+                    </div>
+
+                    <label>
+                        <span>Subject</span>
+                        <input type="text" placeholder="What is this about?">
+                    </label>
+
+                    <label>
+                        <span>Message</span>
+                        <textarea rows="6" placeholder="Type a message"></textarea>
+                    </label>
+
+                    <button type="submit" class="btn">
+                        Send Message <i class="bx bx-up-arrow-alt"></i>
+                    </button>
+                </form>
+            </div>
         </section>
     </main>
 
     <div class="toast" role="status" aria-live="polite">Message ready. I will get back to you soon.</div>
 
     <footer class="footer">
-        <a href="#home" class="logo">Dymond <span>Kong</span></a>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#home" class="logo">DYMOND<span>KONG</span></a>
+                <p>Building clean websites, one project at a time.</p>
+            </div>
 
-        <div class="social-icons">
-            <a href="https://github.com/m0nd365" aria-label="GitHub">
-                <i class="bx bxl-github"></i>
-            </a>
-
-            <a href="https://www.linkedin.com/in/kong-dymond-78a226373/" aria-label="LinkedIn">
-                <i class="bx bxl-linkedin-square"></i>
-            </a>
-
-            <a href="https://www.instagram.com/__m0nd.__/?hl=en" aria-label="Instagram">
-                <i class="bx bxl-instagram-alt"></i>
-            </a>
-
-            <a href="https://www.facebook.com/kong.dymond.2025" aria-label="Facebook">
-                <i class="bx bxl-facebook"></i>
-            </a>
+            <div class="footer-links">
+                <div>
+                    <h5>Pages</h5>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#projects">Work</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div>
+                    <h5>Elsewhere</h5>
+                    <a href="https://github.com/m0nd365">GitHub</a>
+                    <a href="https://www.linkedin.com/in/kong-dymond-78a226373/">LinkedIn</a>
+                    <a href="https://www.instagram.com/__m0nd.__/?hl=en">Instagram</a>
+                    <a href="https://www.facebook.com/kong.dymond.2025">Facebook</a>
+                </div>
+            </div>
         </div>
 
-        <ul class="list">
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="footer-wordmark" aria-hidden="true">DYMOND</div>
 
-        <p class="copyright">&copy; Portfolio | All Rights Reserved</p>
+        <div class="footer-bottom">
+            <p class="copyright">2026 © Dymond Kong. All rights reserved.</p>
+            <div class="social-icons">
+                <span>Connect with</span>
+                <a href="https://github.com/m0nd365" aria-label="GitHub"><i class="bx bxl-github"></i></a>
+                <a href="https://www.linkedin.com/in/kong-dymond-78a226373/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+                <a href="https://www.instagram.com/__m0nd.__/?hl=en" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.facebook.com/kong.dymond.2025" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
+            </div>
+        </div>
     </footer>
 
-    <script src="script.js?v=white-redesign"></script>
+    <script src="script.js?v=noir"></script>
 </body>
 </html>
