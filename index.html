@@ -17,8 +17,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="scroll-progress" aria-hidden="true"></div>
-
     <div class="stage-bg" aria-hidden="true">
         <canvas id="particle-canvas"></canvas>
         <div class="glow glow-one"></div>
@@ -42,16 +40,38 @@
         </nav>
 
         <div class="header-end">
-            <span class="header-mark" aria-hidden="true">+</span>
-            <i class="bx bx-plus" id="menu-icon" aria-label="Menu"></i>
+            <button class="menu-toggle" id="menu-icon" type="button"
+                    aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
+                <span aria-hidden="true">+</span>
+            </button>
         </div>
 
-        <div class="mobile-menu">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#projects">Work</a>
-            <a href="#contact">Contact</a>
+        <div class="menu-panel" id="menu-panel">
+            <div class="menu-panel-inner">
+                <div class="menu-col">
+                    <h5>Pages</h5>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#projects">Work</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="menu-col">
+                    <h5>Elsewhere</h5>
+                    <a href="https://github.com/m0nd365">GitHub</a>
+                    <a href="https://www.linkedin.com/in/kong-dymond-78a226373/">LinkedIn</a>
+                    <a href="https://www.instagram.com/__m0nd.__/?hl=en">Instagram</a>
+                    <a href="https://www.facebook.com/kong.dymond.2025">Facebook</a>
+                </div>
+
+                <div class="menu-col menu-cta">
+                    <h5>Say hello</h5>
+                    <a href="mailto:kongdymond56@gmail.com" class="menu-email">kongdymond56@gmail.com</a>
+                    <p>Phnom Penh, Cambodia — available for internships and freelance work.</p>
+                    <a href="#contact" class="btn">Start a project</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -136,6 +156,18 @@
                                 stack, new constraint, new detail to get right.
                             </p>
                         </div>
+                    </div>
+
+                    <div class="about-actions">
+                        <a class="btn cv-btn" href="Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
+                            Download CV
+                            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16" fill="none"
+                                      stroke="currentColor" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <span class="cv-note">PDF · 1 page · 89 KB</span>
                     </div>
                 </div>
 

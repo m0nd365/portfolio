@@ -21,7 +21,7 @@ const CONTACT_EMAIL = "kongdymond56@gmail.com";
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
 const menuIcon = document.querySelector("#menu-icon");
-const mobileMenu = document.querySelector(".mobile-menu");
+const menuPanel = document.querySelector(".menu-panel");
 const header = document.querySelector(".header");
 const canvas = document.querySelector("#particle-canvas");
 const ctx = canvas ? canvas.getContext("2d") : null;
@@ -46,19 +46,31 @@ const mouse = {
     active: false
 };
 
-/* ---------- mobile navigation ---------- */
+/* ---------- menu panel (the + in the header) ---------- */
 
-if (menuIcon && mobileMenu) {
-    menuIcon.addEventListener("click", () => {
-        menuIcon.classList.toggle("open");
-        mobileMenu.classList.toggle("active");
+function setMenu(open) {
+    if (!menuIcon || !menuPanel) return;
+
+    menuPanel.classList.toggle("active", open);
+    menuIcon.setAttribute("aria-expanded", String(open));
+    menuIcon.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+}
+
+if (menuIcon && menuPanel) {
+    menuIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setMenu(menuIcon.getAttribute("aria-expanded") !== "true");
     });
 
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-            menuIcon.classList.remove("open");
-            mobileMenu.classList.remove("active");
-        });
+    menuPanel.addEventListener("click", (event) => {
+        if (event.target.closest("a")) setMenu(false);
+        else event.stopPropagation();
+    });
+
+    document.addEventListener("click", () => setMenu(false));
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setMenu(false);
     });
 }
 
@@ -233,9 +245,6 @@ document.querySelectorAll(".btn, .filter-btn, .show-email, .social-icons a, .pro
 
 function updateScrollState() {
     header.classList.toggle("scrolled", window.scrollY > 30);
-
-    const scrollRatio = window.scrollY / Math.max(document.body.scrollHeight - window.innerHeight, 1);
-    document.documentElement.style.setProperty("--page-scroll", scrollRatio.toFixed(3));
 
     let currentSection;
     sections.forEach((section) => {
