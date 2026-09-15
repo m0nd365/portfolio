@@ -143,9 +143,9 @@ img {
     left: 0;
     width: 100%;
     z-index: 120;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
     padding: 2rem 4rem;
     border-bottom: 1px solid transparent;
@@ -157,6 +157,13 @@ img {
     backdrop-filter: blur(16px);
     border-bottom-color: var(--line);
     padding: 1.4rem 4rem;
+}
+
+.header-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.6rem;
 }
 
 .header-mark {
@@ -182,6 +189,7 @@ img {
 .navbar {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2.2rem;
 }
 
@@ -347,6 +355,9 @@ section {
 .portrait-frame {
     width: min(42rem, 72vw);
     position: relative;
+    /* the mask fades the lower edge of the portrait, so pull the
+       copy up to close the empty space it leaves behind */
+    margin-bottom: -7rem;
 }
 
 .portrait-frame img {
@@ -714,7 +725,7 @@ section {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.05) 45%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.55) 26%, rgba(0, 0, 0, 0) 58%);
 }
 
 .project-tag {
@@ -722,6 +733,7 @@ section {
     top: 2rem;
     left: 2rem;
     z-index: 2;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
 }
 
 .project-tag h3 {
@@ -1064,11 +1076,11 @@ section {
 @media (max-width: 900px) {
     .header,
     .header.scrolled {
+        grid-template-columns: 1fr auto;
         padding: 1.6rem 2.4rem;
     }
 
-    .nav-left,
-    .nav-right,
+    .navbar,
     .header-mark {
         display: none;
     }
@@ -1110,6 +1122,10 @@ section {
 @media (max-width: 560px) {
     .home {
         padding-top: 12rem;
+    }
+
+    .portrait-frame {
+        margin-bottom: -4.5rem;
     }
 
     .field-row {
