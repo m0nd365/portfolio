@@ -13,10 +13,59 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=noir">
+    <link rel="stylesheet" href="style.css?v=hdr1">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script>
+        // The splash hides the page until the script reveals it, so that
+        // hiding is only ever applied when JavaScript is actually running.
+        // Without this flag a blocked or failed script.js would leave a
+        // blank page instead of a plain, un-animated site.
+        document.documentElement.classList.add("splash-js");
+
+        // a refresh should open on the hero, not wherever the reader had
+        // scrolled to. Browsers restore the old offset by default, and a #hash
+        // left in the address bar jumps too, so both are cleared before the
+        // first paint.
+        try {
+            if ("scrollRestoration" in history) {
+                history.scrollRestoration = "manual";
+            }
+            if (window.location.hash) {
+                history.replaceState(null, "", window.location.pathname + window.location.search);
+            }
+        } catch (e) {
+            /* some origins refuse replaceState; the script below must still run */
+        }
+
+        // dark is the default; a saved choice is applied before first paint
+        try {
+            var saved = localStorage.getItem("theme");
+            if (saved === "light" || saved === "dark") {
+                document.documentElement.setAttribute("data-theme", saved);
+            }
+        } catch (e) {}
+
+        // and if script.js never arrives, drop the flag so the page shows
+        setTimeout(function () {
+            if (!window.__splashRunning) {
+                document.documentElement.classList.remove("splash-js");
+            }
+        }, 2500);
+    </script>
 </head>
 <body>
+    <div class="splash" id="splash" role="presentation">
+        <div class="splash-word" aria-hidden="true">
+            <span class="splash-letter"><i>D</i></span>
+            <span class="splash-letter"><i>Y</i></span>
+            <span class="splash-letter"><i>M</i></span>
+            <span class="splash-letter is-o"><i>O</i></span>
+            <span class="splash-letter"><i>N</i></span>
+            <span class="splash-letter"><i>D</i></span>
+        </div>
+        <div class="splash-mark" aria-hidden="true"></div>
+    </div>
+
     <div class="stage-bg" aria-hidden="true">
         <canvas id="particle-canvas"></canvas>
         <div class="glow glow-one"></div>
@@ -24,7 +73,7 @@
         <div class="noise-layer"></div>
     </div>
 
-    <header class="header">
+    <header class="header page-flat">
         <a href="#home" class="logo">DYMOND<span>KONG</span></a>
 
         <nav class="navbar">
@@ -40,6 +89,16 @@
         </nav>
 
         <div class="header-end">
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2"/>
+                    <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.5 6.5 4.9 4.9M19.1 19.1l-1.6-1.6M17.5 6.5l1.6-1.6M4.9 19.1l1.6-1.6"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 14.2A8.4 8.4 0 0 1 9.8 3.5a8.4 8.4 0 1 0 10.7 10.7Z"/>
+                </svg>
+            </button>
+
             <button class="menu-toggle" id="menu-icon" type="button"
                     aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
                 <span aria-hidden="true">+</span>
@@ -75,7 +134,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="page-shell">
         <section class="home" id="home">
             <div class="portrait-frame">
                 <img src="image1.jpg" alt="Portrait of Dymond Kong">
@@ -446,7 +505,7 @@
 
     <div class="toast" role="status" aria-live="polite">Message ready. I will get back to you soon.</div>
 
-    <footer class="footer">
+    <footer class="footer page-shell">
         <div class="footer-top">
             <div class="footer-brand">
                 <a href="#home" class="logo">DYMOND<span>KONG</span></a>
@@ -485,6 +544,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=noir"></script>
+    <script src="script.js?v=hdr1"></script>
 </body>
 </html>

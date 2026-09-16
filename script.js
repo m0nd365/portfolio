@@ -20,6 +20,300 @@
 const CONTACT_EMAIL = "kongdymond56@gmail.com";
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
+/* ---------- splash ---------- */
+
+(function runSplash() {
+    const splash = document.querySelector("#splash");
+    const mark = document.querySelector(".splash-mark");
+    const shells = document.querySelectorAll(".page-shell, .page-flat");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!splash) return;
+
+    // Snapped on rather than faded: the page is behind opaque white when this
+    // runs, so the transition would only be a large composite competing with
+    // the zoom for frames.
+    const revealPage = () => shells.forEach((el) => {
+        el.style.transition = "none";
+        el.classList.add("page-in");
+    });
+
+    if (reduced) {
+        splash.remove();
+        revealPage();
+        return;
+    }
+
+    window.__splashRunning = true;          // tells the head script to stand down
+    document.body.classList.add("splash-active");
+
+    // belt and braces with the head script: images finishing late can nudge
+    // the page, so pin it to the top until the splash hands over
+    const toTop = () => window.scrollTo(0, 0);
+    toTop();
+    window.addEventListener("load", toTop);
+
+    // Lay the ring exactly over the O of DYMOND — same size, same place —
+    // so when the glyph fades and the ring appears, the shape never moves.
+    // Ratios are the O's proportions in Plus Jakarta Sans ExtraBold.
+    const word = splash.querySelector(".splash-word");
+    const letterO = splash.querySelector(".splash-letter.is-o");
+
+    // Rasterise the O once and read its real proportions off the pixels, so
+    // the ring matches whatever font actually loaded — down to the stroke
+    // weight and where the ink sits relative to the baseline.
+    let shape = {
+        width: 0.72, height: 0.73, stroke: 0.17, shift: 0,
+        ascent: 0.72, descent: 0.01, fontAscent: 0.98, fontDescent: 0.25
+    };
+    let measuredFor = "";
+
+    const measureO = (style) => {
+        const key = `${style.fontWeight} ${style.fontFamily}`;
+        if (key === measuredFor) return;
+
+        try {
+            const box = 200;
+            const baseline = box * 1.3;
+            const canvas = document.createElement("canvas");
+            canvas.width = box * 2;
+            canvas.height = box * 2;
+
+            const ctx = canvas.getContext("2d", { willReadFrequently: true });
+            ctx.font = `${style.fontWeight} ${box}px ${style.fontFamily}`;
+            ctx.textBaseline = "alphabetic";
+            ctx.fillStyle = "#000000";
+            ctx.fillText("O", box * 0.4, baseline);
+
+            const metrics = ctx.measureText("O");
+
+            // where the ink starts and stops along a line of pixels
+            const edges = (pixels, count) => {
+                const found = [];
+                let inside = false;
+                for (let i = 0; i < count; i += 1) {
+                    const on = pixels[i * 4 + 3] > 128;
+                    if (on !== inside) {
+                        found.push(i);
+                        inside = on;
+                    }
+                }
+                return found;
+            };
+
+            const inkTop = baseline - metrics.actualBoundingBoxAscent;
+            const midY = Math.round(inkTop + metrics.actualBoundingBoxAscent / 2);
+            const across = edges(ctx.getImageData(0, midY, canvas.width, 1).data, canvas.width);
+
+            if (across.length === 4) {
+                // down the true centre of the glyph, so the scan crosses the
+                // top and bottom of the O rather than the side of one stroke
+                const midX = Math.round((across[0] + across[3]) / 2);
+                const down = edges(ctx.getImageData(midX, 0, 1, canvas.height).data, canvas.height);
+
+                if (down.length === 4) {
+                    const last = down[3];
+                    const sideStroke = across[1] - across[0];
+                    const capStroke = down[1] - down[0];
+
+                    shape = {
+                        width: (across[3] - across[0]) / box,
+                        height: (last - down[0]) / box,
+                        // the ink is rarely centred in the advance width
+                        shift: (((across[0] + across[3]) / 2) - (box * 0.4 + metrics.width / 2)) / box,
+                        // one CSS border can't be thick at the sides and thin
+                        // on top the way a real O is, so split the difference
+                        stroke: ((sideStroke + capStroke) / 2) / box,
+                        ascent: (baseline - down[0]) / box,
+                        descent: (last - baseline) / box,
+                        fontAscent: metrics.fontBoundingBoxAscent / box,
+                        fontDescent: metrics.fontBoundingBoxDescent / box
+                    };
+                    measuredFor = key;
+                }
+            }
+        } catch (error) {
+            /* keep the fallback ratios */
+        }
+    };
+
+    let offset = { x: 0, y: 0 };            // how far the word has been slid
+
+    const placeMark = () => {
+        if (!mark || !word || !letterO) return;
+
+        const style = window.getComputedStyle(word);
+        const size = parseFloat(style.fontSize) || 100;
+
+        measureO(style);
+
+        const glyph = letterO.querySelector("i") || letterO;
+        const rect = glyph.getBoundingClientRect();
+        const outerH = size * shape.height;
+        const stroke = size * shape.stroke;
+
+        // the baseline sits below the line box top by the half-leading
+        // plus the font's ascent; the ring is centred on the ink, not the box
+        const leading = (rect.height - (shape.fontAscent + shape.fontDescent) * size) / 2;
+        const baseline = rect.top + leading + shape.fontAscent * size;
+        // letter-spacing is baked into the box as trailing space, so take it
+        // back out before looking for the middle of the glyph itself
+        const tracking = parseFloat(style.letterSpacing) || 0;
+
+        // measured back in the word's own resting position, so this stays
+        // correct however many times it is recalculated
+        const applied = splash.classList.contains("stage-centre") ? offset : { x: 0, y: 0 };
+        const restX = rect.left + (rect.width - tracking) / 2 + shape.shift * size - applied.x;
+        const restY = baseline - (shape.ascent - shape.descent) * size / 2 - applied.y;
+
+        // sideways only: the O keeps the line it was written on
+        const targetX = window.innerWidth / 2;
+        const targetY = restY;
+
+        offset = { x: targetX - restX, y: 0 };
+        splash.style.setProperty("--word-dx", `${offset.x.toFixed(2)}px`);
+
+        // the ring sits on the O where it stands and travels with it
+        mark.style.width = `${size * shape.width}px`;
+        mark.style.height = `${outerH}px`;
+        mark.style.borderWidth = `${stroke}px`;
+        mark.style.left = `${restX}px`;
+        mark.style.top = `${restY}px`;
+
+        // the hole has to clear the corner furthest from where the O sits
+        const corners = [
+            Math.hypot(targetX, targetY),
+            Math.hypot(window.innerWidth - targetX, targetY),
+            Math.hypot(targetX, window.innerHeight - targetY),
+            Math.hypot(window.innerWidth - targetX, window.innerHeight - targetY)
+        ];
+        const hole = Math.max(outerH - stroke * 2, 1);
+        splash.style.setProperty("--splash-scale", ((Math.max(...corners) * 2.2) / hole).toFixed(2));
+    };
+
+    const timers = [];
+    const at = (delay, fn) => timers.push(window.setTimeout(fn, delay));
+
+    let finished = false;
+
+    function finish(immediate) {
+        if (finished) return;
+        finished = true;
+
+        timers.forEach(window.clearTimeout);
+        toTop();
+        window.removeEventListener("load", toTop);
+        if (mark) mark.style.willChange = "auto";   // let the layer go
+        splash.classList.add("done");
+        document.body.classList.remove("splash-active");
+        revealPage();
+
+        window.setTimeout(() => splash.classList.add("gone"), immediate ? 0 : 500);
+    }
+
+    placeMark();
+    window.addEventListener("resize", placeMark);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeMark);
+
+    //  bars slide in → glyphs appear → blocks dissolve into letters →
+    //  every letter but the O fades → the O becomes the ring → it zooms
+    //  in until its counter opens onto the page
+    at(60, () => splash.classList.add("stage-blocks"));
+    at(560, () => splash.classList.add("stage-glyphs"));
+    at(940, () => splash.classList.add("stage-letters"));
+
+    at(1440, () => splash.classList.add("stage-mark"));      // the rest fade out
+    at(1700, () => {
+        placeMark();
+        splash.classList.add("stage-centre");                 // word and ring slide across
+    });
+
+    // the page is painted and composited here, while the white still covers
+    // everything, so nothing heavy happens once the hole is open
+    at(1880, () => revealPage());
+
+    // hand the glyph over to the ring in the middle of the slide: both are
+    // moving on the same curve, and motion hides the change of shape
+    at(1950, () => splash.classList.add("stage-swap"));
+
+    // ring solid on top of the glyph — now the glyph can go, unseen
+    at(2270, () => splash.classList.add("stage-hide"));
+
+    // The zoom takes over just before the slide settles. Two eased motions
+    // back to back read as a pause even with no gap between them — one
+    // decelerating into rest, the next accelerating out of it — so the zoom
+    // interrupts the last stretch and absorbs what is left of the travel.
+    at(2350, () => splash.classList.add("stage-zoom"));
+
+    // the ring has been fully opaque since well before the white goes
+    at(2600, () => splash.classList.add("stage-open"));
+
+    // end when the zoom actually ends rather than on a guessed clock
+    mark.addEventListener("transitionend", (event) => {
+        if (event.propertyName === "transform") finish(true);
+    });
+
+    // deliberate skips only, and not in the first moments — a stray
+    // trackpad nudge right after a refresh should not kill the intro
+    at(700, () => {
+        splash.addEventListener("click", () => finish(false), { once: true });
+        splash.addEventListener("touchstart", () => finish(false), { once: true, passive: true });
+
+        document.addEventListener("keydown", function skip(event) {
+            if (event.key === "Escape" || event.key === "Enter") {
+                document.removeEventListener("keydown", skip);
+                finish(false);
+            }
+        });
+    });
+
+    // last resort: never leave the page hidden, whatever else goes wrong
+    window.setTimeout(() => finish(true), 8000);
+    window.addEventListener("error", () => finish(true));
+}());
+
+/* ---------- light / dark ---------- */
+
+const themeToggle = document.querySelector("#theme-toggle");
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+const root = document.documentElement;
+let inkColour = "#ffffff";              // what the particle field draws with
+
+function readInk() {
+    const value = window.getComputedStyle(root).getPropertyValue("--text").trim();
+    inkColour = value || "#ffffff";
+}
+
+function applyTheme(theme, remember) {
+    if (theme === "light") root.setAttribute("data-theme", "light");
+    else root.removeAttribute("data-theme");
+
+    if (themeToggle) {
+        themeToggle.setAttribute("aria-label", theme === "light" ? "Switch to dark mode" : "Switch to light mode");
+    }
+    if (themeMeta) {
+        themeMeta.setAttribute("content", theme === "light" ? "#f6f6f4" : "#000000");
+    }
+
+    readInk();
+
+    if (remember) {
+        try {
+            localStorage.setItem("theme", theme);
+        } catch (error) {
+            /* private mode, blocked storage — the choice just won't persist */
+        }
+    }
+}
+
+applyTheme(root.getAttribute("data-theme") === "light" ? "light" : "dark", false);
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        applyTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light", true);
+    });
+}
+
 const menuIcon = document.querySelector("#menu-icon");
 const menuPanel = document.querySelector(".menu-panel");
 const header = document.querySelector(".header");
@@ -116,8 +410,17 @@ function resizeCanvas() {
     particles = Array.from({ length: count }, () => createParticle(true));
 }
 
-function drawParticles() {
+let lastParticleFrame = 0;
+
+function drawParticles(now) {
     if (!ctx) return;
+
+    // ~30fps is plenty for dots moving this slowly, and it halves the cost
+    if (now && now - lastParticleFrame < 32) {
+        requestAnimationFrame(drawParticles);
+        return;
+    }
+    lastParticleFrame = now || 0;
 
     mouse.x += (mouse.targetX - mouse.x) * 0.08;
     mouse.y += (mouse.targetY - mouse.y) * 0.08;
@@ -149,14 +452,14 @@ function drawParticles() {
         }
 
         ctx.globalAlpha = particle.life;
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = inkColour;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         ctx.fill();
     });
 
     ctx.globalAlpha = 0.05;
-    ctx.strokeStyle = "#ffffff";
+    ctx.strokeStyle = inkColour;
 
     for (let i = 0; i < particles.length; i += 1) {
         for (let j = i + 1; j < particles.length; j += 1) {
@@ -244,7 +547,10 @@ document.querySelectorAll(".btn, .filter-btn, .show-email, .social-icons a, .pro
 /* ---------- scroll state ---------- */
 
 function updateScrollState() {
-    header.classList.toggle("scrolled", window.scrollY > 30);
+    // a little hysteresis, so hovering around the threshold can't flicker
+    const y = window.scrollY;
+    if (y > 48) header.classList.add("scrolled");
+    else if (y < 16) header.classList.remove("scrolled");
 
     let currentSection;
     sections.forEach((section) => {
