@@ -285,7 +285,7 @@ const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
 const themeToggle = document.querySelector("#theme-toggle");
 const heroPortrait = document.querySelector("#hero-portrait");
-const PORTRAITS = { dark: "image1.jpg", light: "image1-light.jpg" };
+const PORTRAITS = { dark: "assets/images/image1.jpg", light: "assets/images/image1-light.jpg" };
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 const root = document.documentElement;
 let inkColour = "#ffffff";              // what the particle field draws with

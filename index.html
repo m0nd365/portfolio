@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dymond Kong | Portfolio</title>
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     <meta name="theme-color" content="#000000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=cv21">
+    <link rel="stylesheet" href="css/style.css?v=cv21">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script>
         // The splash hides the page until the script reveals it, so that
@@ -143,7 +143,7 @@
     <main class="page-shell">
         <section class="home" id="home">
             <div class="portrait-frame">
-                <img id="hero-portrait" src="image1.jpg" alt="Portrait of Dymond Kong">
+                <img id="hero-portrait" src="assets/images/image1.jpg" alt="Portrait of Dymond Kong">
             </div>
 
             <p class="hero-copy">
@@ -224,7 +224,7 @@
                     </div>
 
                     <div class="about-actions">
-                        <a class="btn cv-btn" href="Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
+                        <a class="btn cv-btn" href="assets/files/Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
                             Download CV
                             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                                 <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16" fill="none"
@@ -237,7 +237,7 @@
                 </div>
 
                 <div class="about-img">
-                    <img src="image1.jpg" alt="Dymond Kong at work">
+                    <img src="assets/images/image1.jpg" alt="Dymond Kong at work">
                 </div>
             </div>
 
@@ -476,7 +476,7 @@
             <div class="projects-box">
                 <article class="project-card is-solo" data-category="backend">
                     <div class="project-shot">
-                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <img src="assets/images/project-bongthom.svg" alt="Go and Fiber">
                         <div class="project-tag">
                             <h3>bongthom-api</h3>
                         </div>
@@ -516,7 +516,7 @@
 
                 <article class="project-card is-solo" data-category="frontend">
                     <div class="project-shot">
-                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <img src="assets/images/project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
                         <div class="project-tag">
                             <h3>wip-clone-project</h3>
                         </div>
@@ -554,6 +554,89 @@
                         </div>
                     </div>
                 </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="assets/images/project-remote.jpg" alt="The Remote OK clone running: a job board with search, location, salary and benefit filters above highlighted job listings" loading="lazy">
+                        <div class="project-tag">
+                            <h3>remote-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of Remote OK, the remote job board: the job
+                            feed with search, location, salary, benefit and tag filters, the
+                            login page, and the multi-step post-a-job form with its payment
+                            panel — every section driven by JSON data, built with Vue 3 and
+                            Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://remote-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live Remote OK clone">
+                                <i class="bx bx-window-alt" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open" href="https://github.com/m0nd365/remote-clone-project" target="_blank" rel="noopener" aria-label="View remote-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="assets/images/project-nomadlist.jpg" alt="The Nomad List clone running: a grid of ranked city cards showing internet speed, weather and monthly cost, beside a sidebar of ads and meetups" loading="lazy">
+                        <div class="project-tag">
+                            <h3>nomadlist-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of Nomad List, the city ranking site for
+                            remote workers: the video hero, the grid of ranked city cards
+                            with internet speed, weather, air quality and monthly cost, the
+                            collapsible filter panel, and the join popup — all driven by
+                            JSON data, built with Vue 3 and Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://nomadlist-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live Nomad List clone">
+                                <i class="bx bx-window-alt" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open" href="https://github.com/m0nd365/nomadlist-clone-project" target="_blank" rel="noopener" aria-label="View nomadlist-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -576,13 +659,6 @@
                         software development, database systems, and the design side
                         that comes with the multimedia track.
                     </p>
-                    <h5 class="exp-label">Coursework</h5>
-                    <div class="chip-row">
-                        <span class="chip">Software Engineering</span>
-                        <span class="chip">Database Systems</span>
-                        <span class="chip">Web Development</span>
-                        <span class="chip">Multimedia Design</span>
-                    </div>
                 </article>
 
                 <article class="edu-card">
@@ -728,7 +804,7 @@
                     <p>Internships</p>
                     <p>Freelance builds</p>
                     <p>Junior developer roles</p>
-                    <a class="footer-cv" href="Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
+                    <a class="footer-cv" href="assets/files/Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
                         Download CV
                         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
                             <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16" fill="none"
@@ -754,6 +830,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=cv21"></script>
+    <script src="js/script.js?v=cv21"></script>
 </body>
 </html>
