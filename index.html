@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=hdr1">
+    <link rel="stylesheet" href="style.css?v=cv21">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script>
         // The splash hides the page until the script reveals it, so that
@@ -81,9 +81,13 @@
             <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#about">About</a>
             <span class="nav-slash" aria-hidden="true">/</span>
-            <a href="#services">Services</a>
+            <a href="#experience">Experience</a>
+            <span class="nav-slash" aria-hidden="true">/</span>
+            <a href="#skills">Skills</a>
             <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#projects">Work</a>
+            <span class="nav-slash" aria-hidden="true">/</span>
+            <a href="#education">Education</a>
             <span class="nav-slash" aria-hidden="true">/</span>
             <a href="#contact">Contact</a>
         </nav>
@@ -111,8 +115,10 @@
                     <h5>Pages</h5>
                     <a href="#home">Home</a>
                     <a href="#about">About</a>
-                    <a href="#services">Services</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#skills">Skills</a>
                     <a href="#projects">Work</a>
+                    <a href="#education">Education</a>
                     <a href="#contact">Contact</a>
                 </div>
 
@@ -137,7 +143,7 @@
     <main class="page-shell">
         <section class="home" id="home">
             <div class="portrait-frame">
-                <img src="image1.jpg" alt="Portrait of Dymond Kong">
+                <img id="hero-portrait" src="image1.jpg" alt="Portrait of Dymond Kong">
             </div>
 
             <p class="hero-copy">
@@ -237,181 +243,368 @@
 
             <div class="stat-row">
                 <div>
+                    <strong>3rd</strong>
+                    <small>Year at Limkokwing</small>
+                </div>
+                <div>
+                    <strong>2027</strong>
+                    <small>Expected graduation</small>
+                </div>
+                <div>
                     <strong>06</strong>
                     <small>Selected projects</small>
                 </div>
                 <div>
                     <strong>03</strong>
-                    <small>Core services</small>
-                </div>
-                <div>
-                    <strong>2026</strong>
-                    <small>Portfolio edition</small>
-                </div>
-                <div>
-                    <strong>100%</strong>
-                    <small>Learning mindset</small>
+                    <small>Languages spoken</small>
                 </div>
             </div>
         </section>
 
-        <section class="services" id="services">
+
+        <section class="experience" id="experience">
             <div class="section-heading">
-                <h2 class="heading">What I <span class="outline">Build</span></h2>
+                <h2 class="heading">Work &amp; <span class="outline">Experience</span></h2>
                 <p class="section-sub">
-                    Three things I keep sharpening, and the kind of work each one
-                    turns into.
+                    Building production software at a startup, plus the rooms
+                    where the work was real, the deadline was short, and the
+                    team had to deliver.
                 </p>
             </div>
 
-            <div class="services-container">
-                <article class="service-box">
-                    <span class="service-index">(01)</span>
-                    <i class="bx bxl-figma service-badge"></i>
-                    <h4>UI / UX Design</h4>
-                    <p>
-                        Page structure, spacing systems, and interfaces that explain
-                        themselves. Wireframe to high fidelity, in one pass.
+            <div class="exp-list">
+                <article class="exp-card is-featured">
+                    <div class="exp-head">
+                        <div>
+                            <h3>Junior Developer</h3>
+                            <p class="exp-org">OTRES · Phnom Penh, Cambodia</p>
+                        </div>
+                        <span class="exp-when">2026 — Present</span>
+                    </div>
+
+                    <p class="exp-body">
+                        Full-stack development at a Cambodian tech startup building the
+                        country's first integrated social media platform. Working across
+                        the stack from database design to mobile interfaces as part of a
+                        multi-product ecosystem including taxi-hailing and e-learning.
                     </p>
-                    <span class="service-link">Design <i class="bx bx-up-arrow-alt"></i></span>
+
+                    <h5 class="exp-label">Key Achievements</h5>
+                    <ul class="ticks">
+                        <li>Building backend APIs with Go and Fiber framework</li>
+                        <li>Designing PostgreSQL databases with connection pooling for high-concurrency scenarios</li>
+                        <li>Developing web interfaces with Nuxt.js (Vue 3), HTML, and JavaScript</li>
+                        <li>Building cross-platform mobile apps with Flutter/Dart, keeping feature parity with the web client</li>
+                        <li>Implementing real-time features with Server-Sent Events (SSE) for live notifications and social interactions</li>
+                        <li>Adding Redis-based caching and rate limiting to improve API performance and reliability</li>
+                        <li>Building media processing pipelines for image and video uploads — compression, resizing, and format normalization</li>
+                        <li>Integrating a local payment gateway into a multi-step checkout flow for an e-learning marketplace</li>
+                        <li>Shipping CI/CD pipelines with multi-platform Docker image builds for production deployment</li>
+                        <li>Learning and applying deep backend concepts — API design patterns, database optimization, and clean architecture</li>
+                        <li>Contributing to a multi-product startup: taxi booking app, e-learning platform, and social media network</li>
+                    </ul>
+
+                    <div class="chip-row">
+                        <span class="chip">Go</span>
+                        <span class="chip">Fiber</span>
+                        <span class="chip">PostgreSQL</span>
+                        <span class="chip">Nuxt.js</span>
+                        <span class="chip">Vue.js</span>
+                        <span class="chip">Flutter</span>
+                        <span class="chip">Dart</span>
+                        <span class="chip">Redis</span>
+                        <span class="chip">Server-Sent Events</span>
+                        <span class="chip">HTML</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">REST APIs</span>
+                        <span class="chip">Database Pooling</span>
+                    </div>
                 </article>
 
-                <article class="service-box">
-                    <span class="service-index">(02)</span>
-                    <i class="bx bx-code-alt service-badge"></i>
-                    <h4>Frontend Development</h4>
-                    <p>
-                        Responsive HTML, CSS, and JavaScript. Accessible markup,
-                        smooth interaction, and layouts that hold at every width.
+                <article class="exp-card">
+                    <div class="exp-head">
+                        <div>
+                            <h3>ACTSmart Cohort 2 — Hackathon</h3>
+                            <p class="exp-org">AUPP Technology Center (ATC) · Phnom Penh</p>
+                        </div>
+                        <span class="exp-when">Competition</span>
+                    </div>
+
+                    <p class="exp-body">
+                        Selected for the second ACTSmart cohort and put through a build
+                        sprint: take a problem statement, form a team, and have something
+                        working by the deadline.
                     </p>
-                    <span class="service-link">Build <i class="bx bx-up-arrow-alt"></i></span>
+
+                    <h5 class="exp-label">What I took from it</h5>
+                    <ul class="ticks">
+                        <li>Shipping something end to end under a hard time limit</li>
+                        <li>Splitting work across a team and keeping the pieces fitting</li>
+                        <li>Presenting a build to judges and defending the decisions in it</li>
+                        <li>Choosing the smallest thing that proves the idea</li>
+                    </ul>
+
+                    <div class="chip-row">
+                        <span class="chip">Teamwork</span>
+                        <span class="chip">Problem Solving</span>
+                        <span class="chip">Rapid Prototyping</span>
+                        <span class="chip">Presenting</span>
+                    </div>
                 </article>
 
-                <article class="service-box">
-                    <span class="service-index">(03)</span>
-                    <i class="bx bx-data service-badge"></i>
-                    <h4>Backend Basics</h4>
-                    <p>
-                        Structured data, cleaner logic, and the foundation a real
-                        interactive product needs behind the interface.
+                <article class="exp-card">
+                    <div class="exp-head">
+                        <div>
+                            <h3>Junior Leadership Academy</h3>
+                            <p class="exp-org">JLA · Digital Marketing &amp; Communication</p>
+                        </div>
+                        <span class="exp-when">Programme</span>
+                    </div>
+
+                    <p class="exp-body">
+                        A leadership and communication programme covering digital marketing
+                        and the people side of working on a team — the part of engineering
+                        that isn't code.
                     </p>
-                    <span class="service-link">Connect <i class="bx bx-up-arrow-alt"></i></span>
+
+                    <h5 class="exp-label">What I took from it</h5>
+                    <ul class="ticks">
+                        <li>Digital marketing and communication fundamentals</li>
+                        <li>People experience: listening, facilitating, handling friction</li>
+                        <li>Speaking to a room and making the point land</li>
+                        <li>Working to a brief someone else wrote</li>
+                    </ul>
+
+                    <div class="chip-row">
+                        <span class="chip">Communication</span>
+                        <span class="chip">Leadership</span>
+                        <span class="chip">Digital Marketing</span>
+                        <span class="chip">Adaptability</span>
+                    </div>
                 </article>
             </div>
         </section>
+
+        <section class="skills" id="skills">
+            <div class="section-heading">
+                <h2 class="heading">Technical <span class="outline">Skills</span></h2>
+                <p class="section-sub">
+                    Where I am today, honestly rated. The bars move as I do.
+                </p>
+            </div>
+
+            <div class="skill-grid">
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>Backend Development</h4>
+                    <div class="skill" style="--level: 90%"><span>Go</span><b>90%</b><i></i></div>
+                    <div class="skill" style="--level: 85%"><span>Fiber (Go Web)</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 88%"><span>REST API Design</span><b>88%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>PostgreSQL</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 75%"><span>MySQL</span><b>75%</b><i></i></div>
+                    <div class="skill" style="--level: 75%"><span>WebSockets</span><b>75%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Clean Architecture</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 78%"><span>i18n / Localization</span><b>78%</b><i></i></div>
+                    <div class="skill" style="--level: 78%"><span>Database Design</span><b>78%</b><i></i></div>
+                    <div class="skill" style="--level: 85%"><span>JWT / Auth</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 82%"><span>Redis</span><b>82%</b><i></i></div>
+                    <div class="skill" style="--level: 82%"><span>Refresh Token</span><b>82%</b><i></i></div>
+                    <div class="skill" style="--level: 78%"><span>Server-Sent Events (Real-time)</span><b>78%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>Frontend Development</h4>
+                    <div class="skill" style="--level: 85%"><span>JavaScript</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 50%"><span>TypeScript</span><b>50%</b><i></i></div>
+                    <div class="skill" style="--level: 95%"><span>HTML5</span><b>95%</b><i></i></div>
+                    <div class="skill" style="--level: 90%"><span>CSS3</span><b>90%</b><i></i></div>
+                    <div class="skill" style="--level: 45%"><span>Tailwind CSS</span><b>45%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Next.js</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Nuxt.js (Vue 3)</span><b>80%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>Mobile Development</h4>
+                    <div class="skill" style="--level: 78%"><span>Flutter</span><b>78%</b><i></i></div>
+                    <div class="skill" style="--level: 78%"><span>Dart</span><b>78%</b><i></i></div>
+                    <div class="skill" style="--level: 72%"><span>State Management</span><b>72%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>UI/UX Engineering</h4>
+                    <div class="skill" style="--level: 85%"><span>Accessibility</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Design System</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 90%"><span>Responsive Design</span><b>90%</b><i></i></div>
+                    <div class="skill" style="--level: 75%"><span>Figma</span><b>75%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>Testing &amp; Performance</h4>
+                    <div class="skill" style="--level: 75%"><span>React Testing</span><b>75%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Lighthouse Optimization</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 85%"><span>Code Debugging</span><b>85%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>AI &amp; MLOps</h4>
+                    <div class="skill" style="--level: 85%"><span>LLM Integration</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 90%"><span>Prompt Engineering</span><b>90%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>RAG Pipelines</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 75%"><span>Model Fine-tuning</span><b>75%</b><i></i></div>
+                </article>
+
+                <article class="skill-card">
+                    <h4><span class="dot" aria-hidden="true"></span>Tools &amp; Technologies</h4>
+                    <div class="skill" style="--level: 85%"><span>Git / GitHub / GitLab</span><b>85%</b><i></i></div>
+                    <div class="skill" style="--level: 95%"><span>Cursor &amp; Warp</span><b>95%</b><i></i></div>
+                    <div class="skill" style="--level: 90%"><span>Gemini / OpenAI</span><b>90%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Claude</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 80%"><span>Figma Make</span><b>80%</b><i></i></div>
+                    <div class="skill" style="--level: 75%"><span>Antigravity</span><b>75%</b><i></i></div>
+                </article>
+            </div>
+        </section>
+
 
         <section class="projects" id="projects">
             <div class="section-heading">
                 <h2 class="heading">Latest <span class="outline">work</span></h2>
                 <p class="section-sub">
-                    Studies, concepts, and builds. Each one made to answer a
-                    specific design question.
+                    What I am building right now — production code, not a mockup.
                 </p>
             </div>
 
-            <div class="project-filters" aria-label="Project filters">
-                <button class="filter-btn active" type="button" data-filter="all">All</button>
-                <button class="filter-btn" type="button" data-filter="design">Design</button>
-                <button class="filter-btn" type="button" data-filter="frontend">Frontend</button>
-                <button class="filter-btn" type="button" data-filter="creative">Creative</button>
+            <div class="projects-box">
+                <article class="project-card is-solo" data-category="backend">
+                    <div class="project-shot">
+                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <div class="project-tag">
+                            <h3>bongthom-api</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            The backend behind an admin and client API: REST endpoints in Go
+                            on Fiber v3, PostgreSQL through sqlx, Redis for caching, JWT with
+                            refresh tokens for auth, and WebSockets for live notifications —
+                            all laid out in handler, router, internal, and pkg layers.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Go</span>
+                            <span class="chip">Fiber v3</span>
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">sqlx</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">JWT</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">go-i18n</span>
+                            <span class="chip">validator</span>
+                            <span class="chip">zerolog</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://github.com/m0nd365/bongthom-api" target="_blank" rel="noopener" aria-label="Open bongthom-api on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <div class="project-tag">
+                            <h3>wip-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of WIP, the maker community: the post feed,
+                            project and user pages, search, notifications, and the paywall
+                            screens — fifteen views wired together with Vue Router and built
+                            on Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://wip-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live WIP clone">
+                                <i class="bx bx-window-alt" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open" href="https://github.com/m0nd365/wip-clone-project" target="_blank" rel="noopener" aria-label="View wip-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <section class="education" id="education">
+            <div class="section-heading">
+                <h2 class="heading">My <span class="outline">Education</span></h2>
+                <p class="section-sub">
+                    Where the foundation was built.
+                </p>
             </div>
 
-            <div class="projects-box">
-                <article class="project-card" data-category="frontend creative">
-                    <div class="project-shot">
-                        <img src="image7.jpg" alt="Prompt engineering project preview">
-                        <div class="project-tag">
-                            <h3>Prompt Engineering</h3>
-                            <span>Frontend</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>Layout, motion, and a sharper first impression.</p>
-                        <a href="#contact" aria-label="Review Prompt Engineering">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="design">
-                    <div class="project-shot">
-                        <img src="image2.jpg" alt="Coffee landing page preview">
-                        <div class="project-tag">
-                            <h3>Coffee Landing</h3>
-                            <span>Design</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>Clean spacing, strong imagery, quiet hover feedback.</p>
-                        <a href="#contact" aria-label="Review Coffee Landing">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
+            <div class="edu-grid">
+                <article class="edu-card is-current">
+                    <span class="edu-when">2023 — 2027</span>
+                    <h3>Bachelor of Software Engineering</h3>
+                    <p class="edu-org">Limkokwing University of Creative Technology</p>
+                    <p>
+                        Software Engineering with Multimedia. Third year, focused on
+                        software development, database systems, and the design side
+                        that comes with the multimedia track.
+                    </p>
+                    <h5 class="exp-label">Coursework</h5>
+                    <div class="chip-row">
+                        <span class="chip">Software Engineering</span>
+                        <span class="chip">Database Systems</span>
+                        <span class="chip">Web Development</span>
+                        <span class="chip">Multimedia Design</span>
                     </div>
                 </article>
 
-                <article class="project-card" data-category="frontend">
-                    <div class="project-shot">
-                        <img src="image3.jpg" alt="Responsive web study preview">
-                        <div class="project-tag">
-                            <h3>Responsive Study</h3>
-                            <span>Frontend</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>Contrast, rhythm, and structure that survives resizing.</p>
-                        <a href="#contact" aria-label="Review Responsive Study">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
-                    </div>
+                <article class="edu-card">
+                    <span class="edu-when">2018 — 2023</span>
+                    <h3>High School</h3>
+                    <p class="edu-org">Royal Intercon School</p>
+                    <p>
+                        Completed secondary education before moving into software
+                        engineering at university.
+                    </p>
                 </article>
 
-                <article class="project-card" data-category="design frontend">
-                    <div class="project-shot">
-                        <img src="image4.jpg" alt="Interface concept preview">
-                        <div class="project-tag">
-                            <h3>Interface Concept</h3>
-                            <span>Design</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>A practice build about hierarchy and confident presentation.</p>
-                        <a href="#contact" aria-label="Review Interface Concept">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
-                    </div>
+                <article class="edu-card">
+                    <span class="edu-when">Graduated</span>
+                    <h3>General English Programme</h3>
+                    <p class="edu-org">Spring Education Center · GEP 12</p>
+                    <p>
+                        Finished the full twelve-level general English programme —
+                        the reason I can work, read documentation, and write in English.
+                    </p>
                 </article>
 
-                <article class="project-card" data-category="creative">
-                    <div class="project-shot">
-                        <img src="image5.jpg" alt="Moonwatch creative project preview">
-                        <div class="project-tag">
-                            <h3>Moonwatch Visual</h3>
-                            <span>Creative</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>Colour, depth, and interactive detail across one page.</p>
-                        <a href="#contact" aria-label="Review Moonwatch Visual">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="project-card" data-category="frontend creative">
-                    <div class="project-shot">
-                        <img src="image6.jpg" alt="Portfolio layout preview">
-                        <div class="project-tag">
-                            <h3>Portfolio Layout</h3>
-                            <span>Creative</span>
-                        </div>
-                    </div>
-                    <div class="project-foot">
-                        <p>Work presented so it reads premium and stays readable.</p>
-                        <a href="#contact" aria-label="Review Portfolio Layout">
-                            <i class="bx bx-up-arrow-alt"></i>
-                        </a>
-                    </div>
-                </article>
             </div>
         </section>
 
@@ -438,11 +631,29 @@
                     </div>
 
                     <div class="contact-line">
-                        <i class="bx bx-code-block"></i>
+                        <i class="bx bxl-github"></i>
                         <div>
-                            <h4>See the code</h4>
+                            <h4>GitHub Code</h4>
                             <p>Every project here is public and open to review.</p>
                             <a href="https://github.com/m0nd365" class="contact-value">github.com/m0nd365</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-line">
+                        <i class="bx bx-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>Call or message, Phnom Penh hours.</p>
+                            <a href="tel:+85577255266" class="contact-value">+855 77 255 266</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-line">
+                        <i class="bx bxl-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>The professional version of this page.</p>
+                            <a href="https://www.linkedin.com/in/kong-dymond-78a226373/" class="contact-value">in/kong-dymond</a>
                         </div>
                     </div>
 
@@ -450,8 +661,7 @@
                         <i class="bx bx-map-alt"></i>
                         <div>
                             <h4>Location</h4>
-                            <p>Phnom Penh, Cambodia. Working remotely, any timezone.</p>
-                            <span class="contact-value">GMT+7</span>
+                            <p>Phnom Penh, Cambodia.</p>
                         </div>
                     </div>
                 </div>
@@ -514,18 +724,18 @@
 
             <div class="footer-links">
                 <div>
-                    <h5>Pages</h5>
-                    <a href="#about">About</a>
-                    <a href="#services">Services</a>
-                    <a href="#projects">Work</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div>
-                    <h5>Elsewhere</h5>
-                    <a href="https://github.com/m0nd365">GitHub</a>
-                    <a href="https://www.linkedin.com/in/kong-dymond-78a226373/">LinkedIn</a>
-                    <a href="https://www.instagram.com/__m0nd.__/?hl=en">Instagram</a>
-                    <a href="https://www.facebook.com/kong.dymond.2025">Facebook</a>
+                    <h5>Open to</h5>
+                    <p>Internships</p>
+                    <p>Freelance builds</p>
+                    <p>Junior developer roles</p>
+                    <a class="footer-cv" href="Internship%20Resume.pdf" download="Dymond-Kong-CV.pdf">
+                        Download CV
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 19h16" fill="none"
+                                  stroke="currentColor" stroke-width="2"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -544,6 +754,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=hdr1"></script>
+    <script src="script.js?v=cv21"></script>
 </body>
 </html>

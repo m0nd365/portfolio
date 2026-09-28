@@ -45,13 +45,20 @@ const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
     }
 
     window.__splashRunning = true;          // tells the head script to stand down
-    document.body.classList.add("splash-active");
+    document.documentElement.classList.add("splash-active");
 
     // belt and braces with the head script: images finishing late can nudge
-    // the page, so pin it to the top until the splash hands over
-    const toTop = () => window.scrollTo(0, 0);
+    // the page, so pin it to the top until the splash hands over. Instant,
+    // or the page's smooth scrolling turns this into a visible glide.
+    const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     toTop();
     window.addEventListener("load", toTop);
+
+    // overflow: hidden doesn't stop every wheel and touch (older iOS Safari),
+    // so swallow them while the intro plays
+    const blockScroll = (event) => event.preventDefault();
+    window.addEventListener("wheel", blockScroll, { passive: false });
+    window.addEventListener("touchmove", blockScroll, { passive: false });
 
     // Lay the ring exactly over the O of DYMOND — same size, same place —
     // so when the glyph fades and the ring appears, the shape never moves.
@@ -203,9 +210,11 @@ const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
         timers.forEach(window.clearTimeout);
         toTop();
         window.removeEventListener("load", toTop);
+        window.removeEventListener("wheel", blockScroll);
+        window.removeEventListener("touchmove", blockScroll);
         if (mark) mark.style.willChange = "auto";   // let the layer go
         splash.classList.add("done");
-        document.body.classList.remove("splash-active");
+        document.documentElement.classList.remove("splash-active");
         revealPage();
 
         window.setTimeout(() => splash.classList.add("gone"), immediate ? 0 : 500);
@@ -275,6 +284,8 @@ const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 /* ---------- light / dark ---------- */
 
 const themeToggle = document.querySelector("#theme-toggle");
+const heroPortrait = document.querySelector("#hero-portrait");
+const PORTRAITS = { dark: "image1.jpg", light: "image1-light.jpg" };
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 const root = document.documentElement;
 let inkColour = "#ffffff";              // what the particle field draws with
@@ -296,6 +307,14 @@ function applyTheme(theme, remember) {
     }
 
     readInk();
+
+    // the portrait comes pre-matted onto this theme's background colour
+    if (heroPortrait) {
+        const wanted = PORTRAITS[theme] || PORTRAITS.dark;
+        if (!heroPortrait.getAttribute("src").endsWith(wanted)) {
+            heroPortrait.src = wanted;
+        }
+    }
 
     if (remember) {
         try {
@@ -497,13 +516,16 @@ window.addEventListener("pointerleave", () => {
 
 const revealTargets = [
     ".portrait-frame",
+    ".exp-card",
+    ".skill-card",
+    ".chip-panel",
+    ".edu-card",
     ".hero-copy",
     ".scroll-cue",
     ".section-heading",
     ".accordion",
     ".about-img",
     ".stat-row",
-    ".service-box",
     ".project-filters",
     ".project-card",
     ".contact-intro",

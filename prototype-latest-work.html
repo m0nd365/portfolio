@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latest work — layout prototype</title>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* PROTOTYPE ONLY — nothing here touches the real page */
+    body { padding: 6rem 4rem; }
+    .proto-head { max-width: 120rem; margin: 0 auto 3rem; }
+    .proto-head h1 { font-size: 3rem; margin-bottom: 0.8rem; }
+    .proto-head p { font-family: var(--mono); font-size: 1.3rem; color: var(--muted); }
+    .proto { max-width: 120rem; margin: 0 auto 9rem; }
+    .proto > h2 {
+        font-family: var(--mono); font-size: 1.2rem; font-weight: 400;
+        letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+        padding-bottom: 1.2rem; margin-bottom: 2.4rem; border-bottom: 1px solid var(--line);
+    }
+    .proto > h2 b { color: var(--text); font-weight: 400; letter-spacing: 0; text-transform: none; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+
+    /* ---- B: vertical cards, two per row ---- */
+    .v-two .projects-box { grid-template-columns: repeat(2, 1fr); }
+    .v-two .project-card.is-solo { display: block; }
+    .v-two .project-card.is-solo .project-shot img { aspect-ratio: 16 / 10; height: auto; min-height: 0; }
+
+    /* ---- C: vertical cards, two per row, compact body ---- */
+    .v-compact .projects-box { grid-template-columns: repeat(2, 1fr); }
+    .v-compact .project-card.is-solo { display: block; }
+    .v-compact .project-card.is-solo .project-shot img { aspect-ratio: 16 / 10; height: auto; min-height: 0; }
+    .v-compact .project-body { padding: 2.6rem 2.8rem 3rem; }
+    .v-compact .exp-label { display: none; }
+    .v-compact .project-lead { margin-bottom: 1.8rem; }
+    .v-compact .chip-row { margin-bottom: 0; }
+    .v-compact .project-links { margin-top: 2rem; }
+
+    /* ---- D: vertical card, full width, cover on top ---- */
+    .v-wide .project-card.is-solo { display: block; }
+    .v-wide .project-card.is-solo .project-shot img { aspect-ratio: 21 / 9; height: auto; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="proto-head">
+    <h1>Latest work — layout prototype</h1>
+    <p>Three vertical options against what is on the site now. Nothing here changes the real page.</p>
+</div>
+
+<main class="page-shell page-in">
+
+<section class="proto v-two">
+    <h2>Option B — <b>vertical, two per row</b></h2>
+    <div class="projects-box">
+<article class="project-card is-solo" data-category="backend">
+                    <div class="project-shot">
+                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <div class="project-tag">
+                            <h3>bongthom-api</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            The backend behind an admin and client API: REST endpoints in Go
+                            on Fiber v3, PostgreSQL through sqlx, Redis for caching, JWT with
+                            refresh tokens for auth, and WebSockets for live notifications —
+                            all laid out in handler, router, internal, and pkg layers.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Go</span>
+                            <span class="chip">Fiber v3</span>
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">sqlx</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">JWT</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">go-i18n</span>
+                            <span class="chip">validator</span>
+                            <span class="chip">zerolog</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://github.com/m0nd365/bongthom-api" target="_blank" rel="noopener" aria-label="Open bongthom-api on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <div class="project-tag">
+                            <h3>wip-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of WIP, the maker community: the post feed,
+                            project and user pages, search, notifications, and the paywall
+                            screens — fifteen views wired together with Vue Router and built
+                            on Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://wip-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live WIP clone">
+                                <i class="bx bx-globe" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open is-quiet" href="https://github.com/m0nd365/wip-clone-project" target="_blank" rel="noopener" aria-label="View wip-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+    </div>
+</section>
+
+<section class="proto v-compact">
+    <h2>Option C — <b>vertical, two per row, compact text</b></h2>
+    <div class="projects-box">
+<article class="project-card is-solo" data-category="backend">
+                    <div class="project-shot">
+                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <div class="project-tag">
+                            <h3>bongthom-api</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            The backend behind an admin and client API: REST endpoints in Go
+                            on Fiber v3, PostgreSQL through sqlx, Redis for caching, JWT with
+                            refresh tokens for auth, and WebSockets for live notifications —
+                            all laid out in handler, router, internal, and pkg layers.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Go</span>
+                            <span class="chip">Fiber v3</span>
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">sqlx</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">JWT</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">go-i18n</span>
+                            <span class="chip">validator</span>
+                            <span class="chip">zerolog</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://github.com/m0nd365/bongthom-api" target="_blank" rel="noopener" aria-label="Open bongthom-api on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <div class="project-tag">
+                            <h3>wip-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of WIP, the maker community: the post feed,
+                            project and user pages, search, notifications, and the paywall
+                            screens — fifteen views wired together with Vue Router and built
+                            on Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://wip-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live WIP clone">
+                                <i class="bx bx-globe" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open is-quiet" href="https://github.com/m0nd365/wip-clone-project" target="_blank" rel="noopener" aria-label="View wip-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+    </div>
+</section>
+
+<section class="proto v-wide">
+    <h2>Option D — <b>vertical, full width, cover on top</b></h2>
+    <div class="projects-box">
+<article class="project-card is-solo" data-category="backend">
+                    <div class="project-shot">
+                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <div class="project-tag">
+                            <h3>bongthom-api</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            The backend behind an admin and client API: REST endpoints in Go
+                            on Fiber v3, PostgreSQL through sqlx, Redis for caching, JWT with
+                            refresh tokens for auth, and WebSockets for live notifications —
+                            all laid out in handler, router, internal, and pkg layers.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Go</span>
+                            <span class="chip">Fiber v3</span>
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">sqlx</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">JWT</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">go-i18n</span>
+                            <span class="chip">validator</span>
+                            <span class="chip">zerolog</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://github.com/m0nd365/bongthom-api" target="_blank" rel="noopener" aria-label="Open bongthom-api on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <div class="project-tag">
+                            <h3>wip-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of WIP, the maker community: the post feed,
+                            project and user pages, search, notifications, and the paywall
+                            screens — fifteen views wired together with Vue Router and built
+                            on Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://wip-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live WIP clone">
+                                <i class="bx bx-globe" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open is-quiet" href="https://github.com/m0nd365/wip-clone-project" target="_blank" rel="noopener" aria-label="View wip-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+    </div>
+</section>
+
+<section class="proto">
+    <h2>Option A — <b>what is on the site now: cover beside the text</b></h2>
+    <div class="projects-box">
+<article class="project-card is-solo" data-category="backend">
+                    <div class="project-shot">
+                        <img src="project-bongthom.svg" alt="Go and Fiber">
+                        <div class="project-tag">
+                            <h3>bongthom-api</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            The backend behind an admin and client API: REST endpoints in Go
+                            on Fiber v3, PostgreSQL through sqlx, Redis for caching, JWT with
+                            refresh tokens for auth, and WebSockets for live notifications —
+                            all laid out in handler, router, internal, and pkg layers.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Go</span>
+                            <span class="chip">Fiber v3</span>
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">sqlx</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">JWT</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">go-i18n</span>
+                            <span class="chip">validator</span>
+                            <span class="chip">zerolog</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://github.com/m0nd365/bongthom-api" target="_blank" rel="noopener" aria-label="Open bongthom-api on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card is-solo" data-category="frontend">
+                    <div class="project-shot">
+                        <img src="project-wip.jpg" alt="The WIP clone running: a maker feed with posts, a sidebar of new projects, and a streaks leaderboard" loading="lazy">
+                        <div class="project-tag">
+                            <h3>wip-clone-project</h3>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <p class="project-lead">
+                            A front-end rebuild of WIP, the maker community: the post feed,
+                            project and user pages, search, notifications, and the paywall
+                            screens — fifteen views wired together with Vue Router and built
+                            on Vite, deployed on Vercel.
+                        </p>
+
+                        <h5 class="exp-label">Built with</h5>
+                        <div class="chip-row">
+                            <span class="chip">Vue 3</span>
+                            <span class="chip">Vue Router</span>
+                            <span class="chip">Vite</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-open" href="https://wip-clone-project.vercel.app/" target="_blank" rel="noopener" aria-label="Open the live WIP clone">
+                                <i class="bx bx-globe" aria-hidden="true"></i>
+                                <span>Open</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                            <a class="project-open is-quiet" href="https://github.com/m0nd365/wip-clone-project" target="_blank" rel="noopener" aria-label="View wip-clone-project on GitHub">
+                                <i class="bx bxl-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                                <i class="bx bx-up-arrow-alt arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+    </div>
+</section>
+
+</main>
+</body>
+</html>

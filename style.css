@@ -8,7 +8,6 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    scroll-behavior: smooth;
 }
 
 :root {
@@ -62,6 +61,10 @@
 html {
     font-size: 62.5%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* keep the scrollbar's space reserved while the splash hides it, so the
+       page doesn't jump sideways when scrolling is handed back */
+    scrollbar-gutter: stable;
 }
 
 body {
@@ -94,7 +97,10 @@ img {
 
 /* ---------- splash ---------- */
 
-body.splash-active {
+/* locked on html, not body: html has its own overflow-x, so body's
+   overflow never reaches the viewport and the page scrolled underneath */
+html.splash-active,
+html.splash-active body {
     overflow: hidden;
 }
 
@@ -618,6 +624,7 @@ section {
 .heading {
     font-size: clamp(3.4rem, 6vw, 6.4rem);
     margin-bottom: 1.8rem;
+    text-wrap: balance;                /* no single word stranded on line two */
 }
 
 .heading .outline {
@@ -693,16 +700,14 @@ section {
     will-change: transform;
 }
 
-[data-theme="light"] .portrait-frame {
-    margin-bottom: 0;
-}
-
+/* Each theme gets the portrait already sitting on its own background colour —
+   black on dark, the page's off-white on light — so the photograph has no edge
+   to see. The file is swapped by the script rather than by hiding a second
+   copy, so only the one in use is ever in the page or fetched. */
+/* the same vignette as dark: a flat rectangle of page colour would still show
+   its edges against the soft glow drifting behind the page */
 [data-theme="light"] .portrait-frame img {
-    filter: none;                      /* keep the red */
-    -webkit-mask-image: none;
-    mask-image: none;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
+    filter: none;                      /* the red rim light stays */
 }
 
 /* the float only runs once the page is revealed */
@@ -887,95 +892,6 @@ section {
     letter-spacing: 0.08em;
 }
 
-/* ---------- services ---------- */
-
-.services-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-    gap: 2rem;
-}
-
-.service-box {
-    position: relative;
-    padding: 3.4rem 3rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: linear-gradient(180deg, var(--surface-2), var(--surface));
-    overflow: hidden;
-    transition: border-color 0.4s ease, transform 0.4s ease;
-}
-
-.service-box::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, var(--sheen), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.service-box:hover {
-    border-color: var(--stroke-strong);
-}
-
-.service-box:hover::before {
-    opacity: 1;
-}
-
-.service-index {
-    position: relative;
-    font-family: var(--mono);
-    font-size: 1.2rem;
-    color: var(--dim);
-    letter-spacing: 0.1em;
-}
-
-.service-badge {
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-    font-size: 2rem;
-    color: var(--text);
-    background: var(--sheen);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.8rem;
-}
-
-.service-box h4 {
-    position: relative;
-    font-size: 2.1rem;
-    margin: 1.6rem 0 1.2rem;
-}
-
-.service-box p {
-    position: relative;
-    font-family: var(--mono);
-    font-size: 1.3rem;
-    color: var(--muted);
-    margin-bottom: 2.4rem;
-}
-
-.service-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--mono);
-    font-size: 1.2rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text);
-}
-
-.service-link i {
-    transition: transform 0.3s ease;
-}
-
-.service-box:hover .service-link i {
-    transform: translate(3px, -3px);
-}
-
 /* ---------- projects ---------- */
 
 .project-filters {
@@ -1012,10 +928,12 @@ section {
     color: var(--invert-fg);
 }
 
+/* two per row, stated outright: an auto-fit track count would not let a
+   card span the row the way `grid-column: 1 / -1` promises */
 .projects-box {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
 }
 
 .project-card {
@@ -1110,13 +1028,103 @@ section {
     color: var(--invert-fg);
 }
 
+/* ---------- project cards ---------- */
+
+/* read top to bottom: the cover, then the write-up under it */
+.project-card.is-solo {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card.is-solo .project-shot img {
+    aspect-ratio: 16 / 10;
+    height: auto;
+    min-height: 0;
+    object-position: center top;
+}
+
+.project-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem 3rem 3.2rem;
+}
+
+.project-lead {
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    color: var(--muted);
+    margin-bottom: 2.4rem;
+}
+
+/* pushed to the foot of the card, so the buttons on cards sitting beside
+   each other line up however long their descriptions run */
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 2.8rem;
+}
+
+.project-open {
+    display: inline-flex;
+    align-items: center;
+    /* the label is centred on the icons rather than sitting on its own
+       baseline, so nothing inside the pill looks a pixel low */
+    line-height: 1;
+    gap: 1rem;
+    padding: 1.3rem 2.2rem;
+    border: 1px solid var(--stroke-strong);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-open i {
+    display: block;
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+/* the arrow leans out of the card, the way an external link should read */
+.project-open .arrow {
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.project-open:hover {
+    background: var(--invert-bg);
+    border-color: var(--invert-bg);
+    color: var(--invert-fg);
+}
+
+.project-open:hover .arrow {
+    transform: rotate(45deg) translateY(-0.3rem);
+}
+
+
+@media (max-width: 900px) {
+    .projects-box {
+        grid-template-columns: 1fr;
+    }
+
+    .project-body {
+        padding: 2.6rem 2.2rem 2.8rem;
+    }
+}
+
 /* ---------- contact ---------- */
 
 .contact-grid {
     display: grid;
     grid-template-columns: 0.85fr 1.15fr;
     gap: 2rem;
-    align-items: start;
+    /* both boxes share one height, so their bottom edges line up */
+    align-items: stretch;
 }
 
 .contact-intro,
@@ -1358,7 +1366,8 @@ section {
     text-transform: uppercase;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-links p {
     display: block;
     font-family: var(--mono);
     font-size: 1.3rem;
@@ -1367,10 +1376,28 @@ section {
     transition: color 0.25s ease;
 }
 
-.footer-links a:hover {
-    color: var(--text);
+.footer-links p {
+    max-width: 30rem;
 }
 
+.footer-cv {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+    color: var(--text) !important;
+    border-bottom: 1px solid var(--line);
+}
+
+.footer-cv svg {
+    transition: transform 0.3s ease;
+}
+
+.footer-cv:hover svg {
+    transform: translateY(3px);
+}
+
+/* the oversized name washed across the foot of the page */
 .footer-wordmark {
     font-family: var(--display);
     font-size: clamp(7rem, 17vw, 20rem);
@@ -1541,5 +1568,338 @@ section {
     *::after {
         animation: none !important;
         transition: none !important;
+    }
+}
+
+/* =========================================================
+   CV sections — profile, experience, skills, education
+   Built from the same pieces as the rest of the page:
+   hairline cards on --surface, mono labels, display headings.
+   ========================================================= */
+
+.stack-label,
+.exp-label {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 2.4rem 0 1.4rem;
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.chip {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--sheen);
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.chip:hover {
+    color: var(--text);
+    border-color: var(--stroke-strong);
+}
+
+/* ---------- experience ---------- */
+
+/* two equal columns rather than auto-fit: auto-fit opened a third column
+   on a wide screen, and the two cards then stopped short of the featured
+   card's right edge instead of squaring up with it */
+.exp-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .exp-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.exp-card {
+    padding: 3.2rem 3rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.4s ease;
+}
+
+.exp-card:hover {
+    border-color: var(--stroke-strong);
+}
+
+/* the current role spans the full row, and its longer list of
+   achievements runs in two columns while there is room for them */
+.exp-card.is-featured {
+    grid-column: 1 / -1;
+    border-color: var(--stroke-strong);
+}
+
+@media (min-width: 1000px) {
+    .exp-card.is-featured .ticks {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 3.2rem;
+    }
+}
+
+.exp-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.8rem;
+}
+
+.exp-head h3 {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+}
+
+.exp-org {
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    color: var(--dim);
+}
+
+.exp-when {
+    flex-shrink: 0;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.exp-body {
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    color: var(--muted);
+}
+
+.ticks {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.4rem;
+}
+
+.ticks li {
+    position: relative;
+    padding-left: 2.6rem;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    color: var(--muted);
+}
+
+.ticks li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid var(--stroke-strong);
+    border-radius: 50%;
+}
+
+.ticks li::after {
+    content: "";
+    position: absolute;
+    left: 0.38rem;
+    top: 0.82em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--text);
+}
+
+/* ---------- skills ---------- */
+
+/* multi-column rather than a grid: the groups are wildly different lengths,
+   and grid rows would stretch the short cards to match the tall one */
+.skill-grid {
+    columns: 2;
+    column-gap: 2rem;
+}
+
+.skill-card {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+    .skill-grid {
+        columns: 1;
+    }
+}
+
+.skill-card {
+    padding: 3rem 2.8rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.4s ease;
+}
+
+.skill-card:hover {
+    border-color: var(--stroke-strong);
+}
+
+.skill-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.7rem;
+    margin-bottom: 2.4rem;
+}
+
+.skill-card .dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--text);
+}
+
+.skill {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    margin-bottom: 1.6rem;
+}
+
+.skill span,
+.skill b {
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.skill b {
+    color: var(--dim);
+}
+
+/* the track, with the fill riding inside it */
+.skill i {
+    grid-column: 1 / -1;
+    display: block;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--sheen);
+    overflow: hidden;
+}
+
+.skill i::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--text);
+    transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* filled only once the card is on screen, so the bars read as a measurement
+   being taken rather than a static graphic */
+.skill-card.visible .skill i::after {
+    width: var(--level, 0%);
+}
+
+.chip-panel {
+    margin-top: 2rem;
+    padding: 2.6rem 3rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.chip-panel h5 {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 1.6rem;
+}
+
+/* ---------- education ---------- */
+
+.edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+    gap: 2rem;
+}
+
+.edu-card {
+    padding: 3.2rem 3rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.4s ease;
+}
+
+.edu-card:hover {
+    border-color: var(--stroke-strong);
+}
+
+.edu-card.is-current {
+    border-color: var(--stroke-strong);
+}
+
+.edu-when {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 1.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.edu-card h3 {
+    font-size: 1.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.edu-org {
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    color: var(--dim);
+    margin-bottom: 1.6rem;
+}
+
+.edu-card p {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    color: var(--muted);
+}
+
+@media (max-width: 900px) {
+    .exp-card,
+    .skill-card,
+    .edu-card,
+    .chip-panel {
+        padding: 2.6rem 2.2rem;
+    }
+
+    .exp-head {
+        flex-direction: column;
+        gap: 1.2rem;
     }
 }
